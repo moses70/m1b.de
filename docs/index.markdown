@@ -11,9 +11,8 @@ Unter dem Namen war ich von 2000 bis 2013 für alle Arten von IT-Projekten zu ha
 
 ## What's new
 
-> Zur Zeit bei ZEISS unterwegs.
->
-> Das gibt es auch einiges zu tun.
+> Arbeitet bei ZEISS Optotechnik GmbH.
+
 
 ## Projekte
 
