@@ -22,9 +22,11 @@ title: M1B
 email: office@moosauer.de
 iconURL: assets/default-icon.png
 description: >- # this means to ignore newlines until "baseurl:"
-  Reinhard Moosaer, Software Entwickler
+  Reinhard Moosauer, Software Entwickler
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://m1b.de" # the base hostname & protocol for your site, e.g. http://example.com
+
+google_analytics: UA-180633356-1
 
 social:
   twitter: YOUR_TWITTER
