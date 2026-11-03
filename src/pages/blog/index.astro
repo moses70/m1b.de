@@ -10,21 +10,21 @@ const sortedPosts = allPosts.sort(
 ---
 
 <BaseLayout
-  title="Alle Artikel | m1b.de IT Blog"
-  description="Übersicht aller Fachbeiträge zu Software-Architektur, C#, DevOps und IT-Beratung."
+  title="All Articles | m1b.de IT Blog"
+  description="Overview of all technical articles on software architecture, C#, DevOps, and IT consulting."
 >
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
     
     <!-- Page Header -->
     <header class="border-b border-slate-800 pb-8 space-y-2">
       <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-950 text-brand-300 text-xs font-mono border border-brand-800/50">
-        <span>Archiv</span>
+        <span>Archive</span>
       </div>
       <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
-        Alle Blog-Beiträge
+        All Blog Posts
       </h1>
       <p class="text-sm text-slate-400 font-light">
-        Eine Übersicht aller bisher veröffentlichten Artikel ({sortedPosts.length} Beiträge).
+        An overview of all published articles so far ({sortedPosts.length} {sortedPosts.length === 1 ? 'post' : 'posts'}).
       </p>
     </header>
 

@@ -1,30 +1,30 @@
 # m1b.de – IT & Software Architecture Blog
 
-Statische Blog-Plattform für **m1b.de** (Reinhard Moosauer – IT Beratung & Software Engineering), entwickelt mit **Astro**, **Tailwind CSS** und **GitHub Actions**.
+Static blog platform for **m1b.de** (Reinhard Moosauer – IT Consulting & Software Engineering), built with **Astro**, **Tailwind CSS**, and **GitHub Actions**.
 
 ## 🚀 Quickstart
 
-### Voraussetzungen
+### Prerequisites
 - Node.js >= 20.x
 - npm >= 10.x
 
-### Befehle
+### Commands
 
 ```bash
-# Abhängigkeiten installieren
+# Install dependencies
 npm install
 
-# Lokaler Entwicklungs-Server (http://localhost:4321)
+# Local development server (http://localhost:4321)
 npm run dev
 
-# Statischen Produktions-Build erstellen (Output in ./dist)
+# Build static production output (output in ./dist)
 npm run build
 
-# Vorschau des Produktions-Builds lokal anzeigen
+# Preview production build locally
 npm run preview
 ```
 
-## 📁 Projektstruktur
+## 📁 Project Structure
 
 ```
 .
@@ -41,10 +41,10 @@ npm run preview
 │   ├── pages/                     # Dynamic & static routes (Home, Blog, Tags, About, RSS)
 │   ├── styles/                    # Global Tailwind CSS
 │   └── utils/                     # Helpers (readingTime, slugifyTag)
-├── history.md                     # Protokoll aller Schritte und Entscheidungen
+├── history.md                     # Log of all steps and decisions
 └── astro.config.mjs
 ```
 
 ## 🔄 Automated Deployment
 
-Jeder Push auf den Branch **`dev`** baut und veröffentlicht die Webseite automatisch über GitHub Actions auf GitHub Pages mit der Domain `m1b.de`.
+Every push to the **`dev`** branch automatically builds and publishes the website via GitHub Actions to GitHub Pages under the domain `m1b.de`.

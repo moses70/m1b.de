@@ -33,20 +33,20 @@ const { tag, posts } = Astro.props;
 ---
 
 <BaseLayout
-  title={`Artikel zu #${tag} | m1b.de`}
-  description={`Alle Fachbeiträge und Artikel zum Thema #${tag} auf m1b.de.`}
+  title={`Articles on #${tag} | m1b.de`}
+  description={`All technical posts and articles about #${tag} on m1b.de.`}
 >
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
     
     <header class="border-b border-slate-800 pb-8 space-y-2">
       <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-950 text-brand-300 text-xs font-mono border border-brand-800/50">
-        <span>Thema</span>
+        <span>Topic</span>
       </div>
       <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
         #{tag}
       </h1>
       <p class="text-sm text-slate-400">
-        {posts.length} {posts.length === 1 ? 'Artikel' : 'Artikel'} zu diesem Thema gefunden.
+        {posts.length} {posts.length === 1 ? 'article' : 'articles'} found on this topic.
       </p>
     </header>
 

@@ -1,71 +1,71 @@
-# Dokumentation der Schritte (history.md)
+# Step-by-Step Documentation (history.md)
 
-Dieses Dokument erfasst alle durchgeführten Schritte zur Erstellung und Konfiguration des neuen IT-Blogs **m1b.de** basierend auf **Astro** und **GitHub Actions**.
+This document records all steps taken to create and configure the new IT blog **m1b.de** based on **Astro** and **GitHub Actions**.
 
 ---
 
 ## 1. Repository & Branch Setup
 
 - **Repository**: `https://github.com/moses70/m1b.de`
-- **Ziel-Branch**: `dev`
-- **PAT**: Authentifizierung & Push auf den Entwicklungsbranch `dev`.
-- **Aktion**: Repository geklont und Arbeitsverzeichnis auf dem Entwicklungsbranch `dev` aufgesetzt.
+- **Target Branch**: `dev`
+- **PAT**: Authentication & push to the development branch `dev`.
+- **Action**: Cloned repository and set up the working directory on the `dev` development branch.
 
 ---
 
-## 2. Aufräumarbeiten der Legacy-Jekyll-Struktur
+## 2. Cleanup of Legacy Jekyll Structure
 
-- Die alten Jekyll-Dateien in `docs/` (`Gemfile`, `Gemfile.lock`, `_config.yml`, alte HTML-Dateien) wurden aus dem Repository entfernt.
-- Die Custom-Domain-Zuordnung `m1b.de` wurde in `public/CNAME` angelegt, damit sie bei jedem Astro-Build automatisch nach `dist/CNAME` kopiert wird.
+- Removed the legacy Jekyll files in `docs/` (`Gemfile`, `Gemfile.lock`, `_config.yml`, old HTML files) from the repository.
+- Created the custom domain mapping `m1b.de` in `public/CNAME` so that it is automatically copied to `dist/CNAME` on every Astro build.
 
 ---
 
 ## 3. Astro Framework & Dependency Setup
 
-- **Projekttyp**: Astro v4 (Static Site Generator)
-- **Installierte Integrationen & Pakete**:
-  - `astro`: Statischer Generator & SSG Core.
-  - `@astrojs/tailwind` & `tailwindcss`: Utility-First Styling für modernes IT-Design.
-  - `@astrojs/mdx`: Unterstützung für Markdown & MDX-Inhalte.
-  - `@astrojs/sitemap`: Automatische Generierung von `sitemap-index.xml`.
-  - `@astrojs/rss`: RSS-Feed-Generator unter `/rss.xml`.
+- **Project Type**: Astro v4 (Static Site Generator)
+- **Installed Integrations & Packages**:
+  - `astro`: Static generator & SSG core.
+  - `@astrojs/tailwind` & `tailwindcss`: Utility-first styling for a modern IT design.
+  - `@astrojs/mdx`: Support for Markdown & MDX content.
+  - `@astrojs/sitemap`: Automatic generation of `sitemap-index.xml`.
+  - `@astrojs/rss`: RSS feed generator at `/rss.xml`.
 
 ---
 
-## 4. Design & Komponenten-Architektur
+## 4. Design & Component Architecture
 
-Ein modernes, professionelles IT-Design mit dunklem Farbschema (Slate, Indigo, Cyan), JetBrains Mono für Code-Elemente und klarer Typografie wurde umgesetzt:
+Implemented a modern, professional IT design with a dark color scheme (Slate, Indigo, Cyan), JetBrains Mono for code elements, and clean typography:
 
-1. **`src/styles/global.css`**: Globale CSS-Variablen, dunkler Hintergrundverlauf, custom Codeblock-Styling (Shiki Pro Theme) und Scrollbar.
-2. **`tailwind.config.mjs`**: Anpassung der Farbpaletten und Schriftfamilien (`Inter`, `JetBrains Mono`).
-3. **Komponenten (`src/components/`)**:
-   - `Header.astro`: Navigation mit aktivem Link-Highlight, Markenlogo und mobiler Dropdown-Steuerung.
-   - `Hero.astro`: Prägnanter Hero-Bereich mit Call-to-Actions und Schlagwort-Badge.
-   - `BlogCard.astro`: Karte zur Darstellung von Beiträgen inklusive Tags, Lesezeit-Berechnung und Erscheinungsdatum.
-   - `TableOfContents.astro`: Dynamisches Inhaltsverzeichnis für Artikel.
-   - `TagBadge.astro`: Interaktive Tag-Pillen mit URL-Slugifizierung.
-   - `FormattedDate.astro`: Deutsche Datumsformatierung.
-   - `Footer.astro`: Detaillierter Fußbereich mit Markeninfo, Links, GitHub-Verweis und Copyright.
+1. **`src/styles/global.css`**: Global CSS variables, dark background gradient, custom code block styling (Shiki Pro theme), and scrollbar.
+2. **`tailwind.config.mjs`**: Customized color palettes and font families (`Inter`, `JetBrains Mono`).
+3. **Components (`src/components/`)**:
+   - `Header.astro`: Navigation with active link highlighting, brand logo, and mobile dropdown control.
+   - `Hero.astro`: Concise hero section with call-to-actions and topic badge.
+   - `BlogCard.astro`: Card component for displaying posts including tags, reading time calculation, and publication date.
+   - `TableOfContents.astro`: Dynamic table of contents for articles.
+   - `TagBadge.astro`: Interactive tag pills with URL slugification.
+   - `FormattedDate.astro`: English date formatting.
+   - `Footer.astro`: Detailed footer with brand info, links, GitHub reference, and copyright.
 4. **Layouts (`src/layouts/`)**:
-   - `BaseLayout.astro`: Standard HTML-Grundgerüst mit OpenGraph, Meta-Tags und kanonischen URLs.
-   - `BlogPostLayout.astro`: Spezielles Artikel-Layout mit Metadaten, Autoreninfo und seitlicher Inhaltsnavigation.
+   - `BaseLayout.astro`: Standard HTML shell with OpenGraph, meta tags, and canonical URLs.
+   - `BlogPostLayout.astro`: Dedicated article layout with metadata, author info, and sidebar table of contents navigation.
 
 ---
 
-## 5. Inhaltsstrukturierung & Artikel (Content Collections)
+## 5. Content Structuring & Articles (Content Collections)
 
-- Schemadefinition in `src/content/config.ts` mit Zod-Validierung (Titel, Beschreibung, Datum, Autor, Tags, Featured-Flag).
-- **Veröffentlichte Beiträge**:
-  1. `willkommen-auf-m1b.md`: Begrüßung, Historie der Moosauer IT Beratung und Themenvorschau.
-  2. `roboter-programmierung-csharp.md`: Fachartikel über C#/.NET Roboter-Steuerung und Sensor-Anbindung (Inspiration aus bisherigen Projekten).
-  3. `github-actions-astro-cicd.md`: Anleitungsartikel zur Einrichtung automatisierter CI/CD-Pipelines für Astro.
-  4. `home-assistant-mini-pc-netboot-ki-experiment.md`: KI-Experiment zur Vorbereitung eines Home Assistant Mini-PCs via KI-Agent und `netboot.xyz` PXE-Server.
+- Schema definition in `src/content/config.ts` with Zod validation (Title, Description, Date, Author, Tags, Featured flag).
+- **Published Posts**:
+  1. `willkommen-auf-m1b.md`: Welcome post, history of Moosauer IT Consulting, and topic preview.
+  2. `roboter-programmierung-csharp.md`: Technical article on C#/.NET robot control and sensor integration (inspired by previous projects).
+  3. `github-actions-astro-cicd.md`: Tutorial article on setting up automated CI/CD pipelines for Astro.
+  4. `home-assistant-mini-pc-netboot-ki-experiment.md`: AI experiment on preparing a Home Assistant Mini-PC via an AI coding agent and `netboot.xyz` PXE server.
 
 ---
 
-## 6. Automatisiertes GitHub Actions Deployment Workflow
+## 6. Automated GitHub Actions Deployment Workflow
 
-Erstellt unter `.github/workflows/deploy.yml`:
+Created at `.github/workflows/deploy.yml`:
 
 ```yaml
 name: Deploy Astro Site to GitHub Pages
@@ -123,12 +123,12 @@ jobs:
 
 ---
 
-## 7. Validierung, Build-Test & Push
+## 7. Validation, Build Test & Push
 
-- **Build-Test (`npm run build`)**:
-  - Erzeugt 24 statische HTML-Seiten und Routen in `./dist`.
-  - `dist/CNAME` bleibt erhalten (`m1b.de`).
-  - RSS-Feed (`dist/rss.xml`) und Sitemap (`dist/sitemap-index.xml`) wurden erfolgreich generiert.
-  - 0 Fehler / 0 Warnungen beim Build.
+- **Build Test (`npm run build`)**:
+  - Generates 24 static HTML pages and routes in `./dist`.
+  - `dist/CNAME` is preserved (`m1b.de`).
+  - RSS feed (`dist/rss.xml`) and sitemap (`dist/sitemap-index.xml`) were generated successfully.
+  - 0 errors / 0 warnings during build.
 - **Git Push**:
-  - Sämtliche Quellcodes, Komponenten, Layouts, Artikel, CI/CD-Workflow und Konfigurationen wurden erfolgreich auf den Remote-Branch `dev` bei `https://github.com/moses70/m1b.de` gepusht.
+  - All source code, components, layouts, articles, CI/CD workflow, and configurations were pushed to the remote `dev` branch at `https://github.com/moses70/m1b.de`.

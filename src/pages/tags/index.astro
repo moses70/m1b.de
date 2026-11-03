@@ -17,17 +17,17 @@ const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
 ---
 
 <BaseLayout
-  title="Tags & Themen | m1b.de"
-  description="Alle Schlagwörter und Themengebiete des m1b.de IT-Blogs."
+  title="Tags & Topics | m1b.de"
+  description="All tags and topic areas of the m1b.de IT blog."
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
     
     <header class="border-b border-slate-800 pb-8 space-y-2">
       <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
-        Themenübersicht & Tags
+        Topics & Tags Overview
       </h1>
       <p class="text-sm text-slate-400">
-        Durchsuchen Sie alle Beiträge nach Schlagwörtern.
+        Browse all posts by tag.
       </p>
     </header>
 
@@ -41,7 +41,7 @@ const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
             #{tag}
           </span>
           <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-800 text-slate-400 group-hover:bg-brand-950 group-hover:text-brand-300">
-            {count} {count === 1 ? 'Artikel' : 'Artikel'}
+            {count} {count === 1 ? 'Article' : 'Articles'}
           </span>
         </a>
       ))}

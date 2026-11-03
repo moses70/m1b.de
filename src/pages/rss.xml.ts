@@ -9,7 +9,7 @@ export async function GET(context: { site: URL }) {
 
   return rss({
     title: 'm1b.de – IT Architecture & Software Engineering',
-    description: 'Blog von Reinhard Moosauer über C#/.NET, Anwendungsarchitektur, DevOps, Cloud und Industrie-Automatisierung.',
+    description: 'Blog by Reinhard Moosauer on C#/.NET, application architecture, DevOps, cloud, and industrial automation.',
     site: context.site,
     items: sortedPosts.map((post) => ({
       title: post.data.title,
@@ -18,6 +18,6 @@ export async function GET(context: { site: URL }) {
       customData: `<author>${post.data.author}</author>`,
       link: `/blog/${post.slug}/`,
     })),
-    customData: `<language>de-de</language>`,
+    customData: `<language>en-us</language>`,
   });
 }

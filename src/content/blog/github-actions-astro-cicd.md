@@ -1,24 +1,24 @@
 ---
-title: "Automatisierte CI/CD-Pipelines für Astro mit GitHub Actions"
-description: "Wie Sie einen Astro-Blog mit GitHub Actions automatisch bauen, validieren und auf GitHub Pages bereitstellen."
+title: "Automated CI/CD Pipelines for Astro with GitHub Actions"
+description: "How to automatically build, validate, and deploy an Astro blog to GitHub Pages using GitHub Actions."
 pubDate: 2026-11-01
 author: "Reinhard Moosauer"
 tags: ["DevOps", "GitHub Actions", "Astro", "CI/CD"]
 featured: false
 ---
 
-Automatisierung ist der Schlüssel zu konsistenten und fehlerfreien Software-Releases. Für statische Webseiten wie **m1b.de** lässt sich der gesamte Build- und Deployment-Prozess nahtlos über **GitHub Actions** abbilden.
+Automation is the key to consistent and error-free software releases. For static websites like **m1b.de**, the entire build and deployment process can be mapped seamlessly using **GitHub Actions**.
 
-## Die Workflow-Architektur
+## The Workflow Architecture
 
-Unser GitHub Actions Workflow führt bei jedem Push auf den `dev`-Branch folgende Schritte aus:
+Our GitHub Actions workflow executes the following steps on every push to the `dev` branch:
 
-1. **Checkout des Repositories**: Quellcode wird aus GitHub abgerufen.
-2. **Setup der Node.js-Laufzeitumgebung**: Node.js v20 inklusive Dependency-Caching.
-3. **Installation & Build**: `npm ci` und `npm run build` erzeugen statische HTML-, CSS- und JS-Dateien im `dist/`-Verzeichnis.
-4. **Deployment auf GitHub Pages**: Hochladen der Artefakte und Freigabe über das globale CDN.
+1. **Repository Checkout**: Source code is fetched from GitHub.
+2. **Node.js Runtime Setup**: Node.js v20 including dependency caching.
+3. **Installation & Build**: `npm ci` and `npm run build` generate static HTML, CSS, and JS files in the `dist/` directory.
+4. **Deployment to GitHub Pages**: Uploading the artifacts and publishing them via the global CDN.
 
-## Der Workflow im Detail
+## The Workflow in Detail
 
 ```yaml
 name: Deploy Astro Site to GitHub Pages
@@ -69,9 +69,9 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-## Vorteile dieser CI/CD-Pipeline
+## Benefits of This CI/CD Pipeline
 
-- **Vollautomatisch**: Inhalte schreiben, committen, pushen – die Live-Seite wird binnen Sekunden aktualisiert.
-- **Sicher**: Nutzung kurzlebiger OpenID Connect (OIDC) Tokens statt dauerhafter API-Schlüssel.
-- **Performant**: Durch integriertes Caching dauern Folgebilds nur wenige Sekunden.
+- **Fully Automated**: Write content, commit, push—the live site is updated within seconds.
+- **Secure**: Uses short-lived OpenID Connect (OIDC) tokens instead of long-lived API keys.
+- **Performant**: Thanks to built-in caching, subsequent builds take only a few seconds.
 ---

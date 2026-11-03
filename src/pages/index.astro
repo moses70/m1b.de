@@ -30,10 +30,10 @@ const allTags = Array.from(
         <div>
           <h2 class="text-2xl font-bold tracking-tight text-slate-100 flex items-center space-x-2">
             <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span>
-            <span>Aktuelle Artikel</span>
+            <span>Latest Articles</span>
           </h2>
           <p class="text-xs text-slate-400 mt-1 font-mono">
-            Einblicke, Leitfäden & Tutorials
+            Insights, Guides & Tutorials
           </p>
         </div>
 
@@ -41,7 +41,7 @@ const allTags = Array.from(
           href="/blog"
           class="text-xs font-mono text-brand-400 hover:text-brand-300 flex items-center space-x-1"
         >
-          <span>Alle Artikel ({sortedPosts.length})</span>
+          <span>All Articles ({sortedPosts.length})</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
@@ -61,10 +61,10 @@ const allTags = Array.from(
         <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
         </svg>
-        <span>Themen & Spezialgebiete</span>
+        <span>Topics & Specialties</span>
       </h3>
       <p class="text-xs text-slate-400 leading-relaxed max-w-2xl">
-        Klicken Sie auf ein Thema, um alle dazugehörigen Fachbeiträge zu durchsuchen:
+        Click on a topic to browse all related technical articles:
       </p>
       <div class="flex flex-wrap gap-2 pt-2">
         {allTags.map((tag) => (
