@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Über Reinhard Moosauer | m1b.de"
+  description="Hintergründe zu Reinhard Moosauer, Moosauer IT Beratung, ZEISS Optotechnik und Software-Engineering."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    
+    <!-- Header -->
+    <header class="border-b border-slate-800 pb-8 space-y-4">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-950 text-brand-300 text-xs font-mono border border-brand-800/50">
+        <span>Profil</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-100 tracking-tight">
+        Über Reinhard Moosauer & m1b.de
+      </h1>
+      <p class="text-lg text-slate-300 font-light leading-relaxed">
+        Software-Entwickler, Systemarchitekt und Experte für Anwendungsentwicklung & Industrie-Automatisierung.
+      </p>
+    </header>
+
+    <!-- Main Profile Content -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Bio text -->
+      <div class="md:col-span-2 space-y-6 text-slate-300 leading-relaxed text-sm sm:text-base">
+        <h2 class="text-xl font-bold text-slate-100 font-mono">
+          Moosauer IT Beratung (2000 – 2013)
+        </h2>
+        <p>
+          Unter dem Namen <strong>Moosauer IT Beratung</strong> war ich von 2000 bis 2013 selbstständig für unterschiedliche IT-Projekte, Software-Architektur und Kundenberatung tätig. Schwerpunkte lagen auf der Entwicklung von maßgeschneiderten Unternehmenslösungen, Datenbankarchitekturen und Systemintegrationen.
+        </p>
+
+        <h2 class="text-xl font-bold text-slate-100 font-mono">
+          Optische Messtechnik & Automation
+        </h2>
+        <p>
+          In meiner aktuellen Tätigkeit bei der <strong>ZEISS Optotechnik GmbH</strong> konzentriere ich mich auf die Entwicklung komplexer Softwarelösungen im Umfeld optischer 3D-Sensorik, Roboter-Ansteuerung (u.a. in C# und .NET) sowie performanter Datenverarbeitung.
+        </p>
+
+        <h2 class="text-xl font-bold text-slate-100 font-mono">
+          Technologie-Stack & Interessen
+        </h2>
+        <ul class="list-disc pl-5 space-y-2 text-slate-300">
+          <li><strong>Programmiersprachen:</strong> C#, TypeScript, C++, SQL, Bash</li>
+          <li><strong>Frameworks & Tools:</strong> .NET / .NET Core, Astro, Node.js, Docker, Git</li>
+          <li><strong>DevOps & CI/CD:</strong> GitHub Actions, Automated Testing, Cloud Deployments</li>
+          <li><strong>Anwendungsdomänen:</strong> Industrie 4.0, Robotersteuerung, 3D-Messtechnik, Jamstack</li>
+        </ul>
+      </div>
+
+      <!-- Sidebar Info Card -->
+      <aside class="space-y-6">
+        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/60 space-y-4">
+          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center font-bold text-2xl text-white font-mono shadow-lg shadow-brand-500/20">
+            RM
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-slate-100">Reinhard Moosauer</h3>
+            <p class="text-xs text-slate-400 font-mono">Software Entwickler</p>
+          </div>
+
+          <div class="pt-4 border-t border-slate-800 space-y-3 text-xs">
+            <div>
+              <span class="text-slate-400 font-mono">E-Mail:</span>
+              <p class="text-brand-300 font-mono font-medium">office@moosauer.de</p>
+            </div>
+            <div>
+              <span class="text-slate-400 font-mono">GitHub:</span>
+              <p class="text-brand-300 font-mono font-medium">
+                <a href="https://github.com/moses70" target="_blank" class="hover:underline">github.com/moses70</a>
+              </p>
+            </div>
+            <div>
+              <span class="text-slate-400 font-mono">Standort:</span>
+              <p class="text-slate-200">Deutschland</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+  </div>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Alle Artikel | m1b.de IT Blog"
+  description="Übersicht aller Fachbeiträge zu Software-Architektur, C#, DevOps und IT-Beratung."
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    
+    <!-- Page Header -->
+    <header class="border-b border-slate-800 pb-8 space-y-2">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-950 text-brand-300 text-xs font-mono border border-brand-800/50">
+        <span>Archiv</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+        Alle Blog-Beiträge
+      </h1>
+      <p class="text-sm text-slate-400 font-light">
+        Eine Übersicht aller bisher veröffentlichten Artikel ({sortedPosts.length} Beiträge).
+      </p>
+    </header>
+
+    <!-- Post Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedPosts.map((post) => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+
+  </div>
+</BaseLayout>

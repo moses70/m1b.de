@@ -1,0 +1,119 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import TagBadge from '../components/TagBadge.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { getReadingTime } from '../utils/readingTime';
+
+interface Props {
+  post: {
+    slug: string;
+    body: string;
+    data: {
+      title: string;
+      description: string;
+      pubDate: Date;
+      updatedDate?: Date;
+      author: string;
+      tags: string[];
+      image?: string;
+    };
+  };
+  headings: Array<{
+    depth: number;
+    slug: string;
+    text: string;
+  }>;
+}
+
+const { post, headings } = Astro.props;
+const readingTime = getReadingTime(post.body);
+---
+
+<BaseLayout
+  title={`${post.data.title} | m1b.de`}
+  description={post.data.description}
+  type="article"
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+    
+    <!-- Navigation Back Link -->
+    <div class="mb-8">
+      <a
+        href="/blog"
+        class="inline-flex items-center space-x-2 text-xs font-mono text-slate-400 hover:text-brand-400 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>Zurück zur Übersicht</span>
+      </a>
+    </div>
+
+    <!-- Article Header Header -->
+    <header class="space-y-4 pb-8 border-b border-slate-800">
+      <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-400">
+        <span class="text-brand-400 font-bold">{post.data.author}</span>
+        <span>•</span>
+        <FormattedDate date={post.data.pubDate} />
+        <span>•</span>
+        <span>{readingTime}</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-100 leading-tight">
+        {post.data.title}
+      </h1>
+
+      <p class="text-lg text-slate-300 leading-relaxed font-light">
+        {post.data.description}
+      </p>
+
+      <div class="flex flex-wrap gap-2 pt-2">
+        {post.data.tags.map((tag) => (
+          <TagBadge tag={tag} />
+        ))}
+      </div>
+    </header>
+
+    <!-- Content Body Grid (with TOC) -->
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Main Content -->
+      <div class="lg:col-span-3 prose prose-invert max-w-none space-y-6 text-slate-200 leading-relaxed font-sans">
+        <slot />
+      </div>
+
+      <!-- Sidebar Table of Contents -->
+      <aside class="lg:col-span-1 hidden lg:block">
+        <div class="sticky top-24">
+          <TableOfContents headings={headings} />
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Article Footer -->
+    <footer class="mt-16 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center font-bold text-white font-mono text-sm">
+          RM
+        </div>
+        <div class="text-xs">
+          <p class="font-bold text-slate-200">{post.data.author}</p>
+          <p class="text-slate-400">Moosauer IT Beratung & Software Engineering</p>
+        </div>
+      </div>
+
+      <a
+        href="/blog"
+        class="text-xs font-mono text-brand-400 hover:text-brand-300 flex items-center space-x-1"
+      >
+        <span>Mehr Artikel lesen</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </footer>
+
+  </article>
+</BaseLayout>

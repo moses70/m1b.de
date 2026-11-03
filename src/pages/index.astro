@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import BlogCard from '../components/BlogCard.astro';
+import TagBadge from '../components/TagBadge.astro';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const featuredPosts = sortedPosts.filter((post) => post.data.featured);
+const recentPosts = sortedPosts.slice(0, 6);
+
+// Extract unique tags
+const allTags = Array.from(
+  new Set(sortedPosts.flatMap((post) => post.data.tags))
+);
+---
+
+<BaseLayout>
+  <Hero />
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    
+    <!-- Latest Articles Section -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-slate-100 flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span>
+            <span>Aktuelle Artikel</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-1 font-mono">
+            Einblicke, Leitfäden & Tutorials
+          </p>
+        </div>
+
+        <a
+          href="/blog"
+          class="text-xs font-mono text-brand-400 hover:text-brand-300 flex items-center space-x-1"
+        >
+          <span>Alle Artikel ({sortedPosts.length})</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentPosts.map((post) => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Topics / Tags Section -->
+    <section class="rounded-2xl border border-slate-800 bg-slate-900/40 p-8 space-y-4">
+      <h3 class="text-lg font-bold text-slate-100 font-mono flex items-center space-x-2">
+        <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+        </svg>
+        <span>Themen & Spezialgebiete</span>
+      </h3>
+      <p class="text-xs text-slate-400 leading-relaxed max-w-2xl">
+        Klicken Sie auf ein Thema, um alle dazugehörigen Fachbeiträge zu durchsuchen:
+      </p>
+      <div class="flex flex-wrap gap-2 pt-2">
+        {allTags.map((tag) => (
+          <TagBadge tag={tag} />
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
