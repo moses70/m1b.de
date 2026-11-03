@@ -55,10 +55,11 @@ Ein modernes, professionelles IT-Design mit dunklem Farbschema (Slate, Indigo, C
 ## 5. Inhaltsstrukturierung & Artikel (Content Collections)
 
 - Schemadefinition in `src/content/config.ts` mit Zod-Validierung (Titel, Beschreibung, Datum, Autor, Tags, Featured-Flag).
-- **Beiträge**:
+- **Veröffentlichte Beiträge**:
   1. `willkommen-auf-m1b.md`: Begrüßung, Historie der Moosauer IT Beratung und Themenvorschau.
   2. `roboter-programmierung-csharp.md`: Fachartikel über C#/.NET Roboter-Steuerung und Sensor-Anbindung (Inspiration aus bisherigen Projekten).
   3. `github-actions-astro-cicd.md`: Anleitungsartikel zur Einrichtung automatisierter CI/CD-Pipelines für Astro.
+  4. `home-assistant-mini-pc-netboot-ki-experiment.md`: KI-Experiment zur Vorbereitung eines Home Assistant Mini-PCs via KI-Agent und `netboot.xyz` PXE-Server.
 
 ---
 
@@ -125,7 +126,7 @@ jobs:
 ## 7. Validierung, Build-Test & Push
 
 - **Build-Test (`npm run build`)**:
-  - Erzeugt 19 statische HTML-Seiten und Routen in `./dist`.
+  - Erzeugt 24 statische HTML-Seiten und Routen in `./dist`.
   - `dist/CNAME` bleibt erhalten (`m1b.de`).
   - RSS-Feed (`dist/rss.xml`) und Sitemap (`dist/sitemap-index.xml`) wurden erfolgreich generiert.
   - 0 Fehler / 0 Warnungen beim Build.
