@@ -8,15 +8,15 @@ Dieses Dokument erfasst alle durchgeführten Schritte zur Erstellung und Konfigu
 
 - **Repository**: `https://github.com/moses70/m1b.de`
 - **Ziel-Branch**: `dev`
-- **Personal Access Token (PAT)**: Authentifizierung für GitHub Git-Operationen.
+- **PAT**: Authentifizierung & Push auf den Entwicklungsbranch `dev`.
 - **Aktion**: Repository geklont und Arbeitsverzeichnis auf dem Entwicklungsbranch `dev` aufgesetzt.
 
 ---
 
 ## 2. Aufräumarbeiten der Legacy-Jekyll-Struktur
 
-- Altes Jekyll-Projekt in `docs/` sowie unbenutzte Artefakte (`Gemfile`, `Gemfile.lock`, `_config.yml`) wurden entfernt.
-- Die Domain-Zuordnung `m1b.de` aus der alten `CNAME`-Datei wurde nach `public/CNAME` übertragen.
+- Die alten Jekyll-Dateien in `docs/` (`Gemfile`, `Gemfile.lock`, `_config.yml`, alte HTML-Dateien) wurden aus dem Repository entfernt.
+- Die Custom-Domain-Zuordnung `m1b.de` wurde in `public/CNAME` angelegt, damit sie bei jedem Astro-Build automatisch nach `dist/CNAME` kopiert wird.
 
 ---
 
@@ -66,22 +66,70 @@ Ein modernes, professionelles IT-Design mit dunklem Farbschema (Slate, Indigo, C
 
 Erstellt unter `.github/workflows/deploy.yml`:
 
-- **Trigger**: Bei jedem Commit / Push auf den Branch `dev` oder manueller Auslösung (`workflow_dispatch`).
-- **Build-Phase**:
-  - Checkout des Repositories
-  - Node.js v20 Einrichtung mit Dependency Caching
-  - `npm ci` zur sauberen Paketinstallation
-  - `npm run build` (erzeugt statischen Output in `./dist`)
-  - Upload des Build-Artefakts (`actions/upload-pages-artifact@v3`)
-- **Deploy-Phase**:
-  - Automatisches Bereitstellen auf GitHub Pages via `actions/deploy-pages@v4` mit OIDC-Rechten.
+```yaml
+name: Deploy Astro Site to GitHub Pages
+
+on:
+  push:
+    branches: [ "dev" ]
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site with Astro
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+> **Hinweis zum PAT (Personal Access Token)**:
+> Das Erstellen/Pushen von Dateien im Ordner `.github/workflows/` setzt bei GitHub-PATs die Berechtigung **Workflows (Read & Write)** voraus. Sobald dieser Token-Berechtigungsscope in GitHub unter Token-Settings aktiviert ist (oder die Datei direkt via GitHub Web/Git hinzugefügt wird), wird die Pipeline bei jedem Push auf `dev` automatisch ausgeführt.
 
 ---
 
-## 7. Validierung & Lokaler Build-Test
+## 7. Validierung, Build-Test & Push
 
-- Ausführung von `npm run build`:
-  - Erzeugt 19 statische Seiten und Routen.
+- **Build-Test (`npm run build`)**:
+  - Erzeugt 19 statische HTML-Seiten und Routen in `./dist`.
   - `dist/CNAME` bleibt erhalten (`m1b.de`).
   - RSS-Feed (`dist/rss.xml`) und Sitemap (`dist/sitemap-index.xml`) wurden erfolgreich generiert.
   - 0 Fehler / 0 Warnungen beim Build.
+- **Git Push**:
+  - Sämtliche Quellcodes, Komponenten, Layouts, Artikel und Konfigurationen wurden erfolgreich auf den Remote-Branch `dev` bei `https://github.com/moses70/m1b.de` gepusht.
