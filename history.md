@@ -74,17 +74,17 @@ on:
     branches: [ "dev" ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -102,25 +102,23 @@ jobs:
       - name: Build site with Astro
         run: npm run build
 
-      - name: Upload build artifact
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          cname: m1b.de
+
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (Native)
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
 ```
-
-> **Hinweis zum PAT (Personal Access Token)**:
-> Das Erstellen/Pushen von Dateien im Ordner `.github/workflows/` setzt bei GitHub-PATs die Berechtigung **Workflows (Read & Write)** voraus. Sobald dieser Token-Berechtigungsscope in GitHub unter Token-Settings aktiviert ist (oder die Datei direkt via GitHub Web/Git hinzugefügt wird), wird die Pipeline bei jedem Push auf `dev` automatisch ausgeführt.
 
 ---
 
@@ -132,4 +130,4 @@ jobs:
   - RSS-Feed (`dist/rss.xml`) und Sitemap (`dist/sitemap-index.xml`) wurden erfolgreich generiert.
   - 0 Fehler / 0 Warnungen beim Build.
 - **Git Push**:
-  - Sämtliche Quellcodes, Komponenten, Layouts, Artikel und Konfigurationen wurden erfolgreich auf den Remote-Branch `dev` bei `https://github.com/moses70/m1b.de` gepusht.
+  - Sämtliche Quellcodes, Komponenten, Layouts, Artikel, CI/CD-Workflow und Konfigurationen wurden erfolgreich auf den Remote-Branch `dev` bei `https://github.com/moses70/m1b.de` gepusht.
